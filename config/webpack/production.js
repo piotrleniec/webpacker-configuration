@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CompressionPlugin = require('compression-webpack-plugin')
 const sharedConfig = require('./shared.js')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = merge(sharedConfig, {
   output: { filename: '[name]-[chunkhash].js' },
@@ -30,6 +31,8 @@ module.exports = merge(sharedConfig, {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.(js|css|html|json|ico|svg|eot|otf|ttf)$/
-    })
+    }),
+
+    new ExtractTextPlugin('[name]-[hash].css'),
   ]
 })
